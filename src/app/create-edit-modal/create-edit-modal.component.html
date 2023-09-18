@@ -1,0 +1,36 @@
+<div class="title">
+    <ng-container *ngIf="data?.user else createUserTitle">
+        <span>Update User</span>
+    </ng-container>
+</div>
+<form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="userForm.get('name')?.hasError('required')">Name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username">
+    <mat-error *ngIf="userForm.get('username')?.hasError('required')">Username is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+    <mat-error *ngIf="userForm.get('email')?.hasError('required')">Email is required</mat-error>
+    <mat-error *ngIf="userForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address">
+    <mat-error *ngIf="userForm.get('address')?.hasError('required')">Address is required</mat-error>
+  </mat-form-field>
+
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  <button type="button" (click)="onClose()">Cancel</button>
+</form>
+
+<ng-template #createUserTitle>Create User</ng-template>
